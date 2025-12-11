@@ -302,7 +302,7 @@
       selectProblem(index);
     }
     
-        function showSolution() {
+           function showSolution() {
       const matching = solutions.filter(s => 
         s.problem === selected.problem.problem
       );
@@ -311,8 +311,24 @@
       
       if (matching.length > 0) {
         const solution = matching[Math.floor(Math.random() * matching.length)];
+        
+        // Format the problem text correctly
+        let problemText = selected.problem.problem;
+        let animalName = selected.character.animal;
+        let displayText = `${animalName} is ${problemText}`;
+        
+        if (problemText.toLowerCase().includes('fever')) {
+          displayText = `${animalName} has a ${problemText}`;
+        } else if (problemText.toLowerCase().includes('hurt')) {
+          displayText = `${animalName} has hurt their paw`;
+        } else if (problemText.toLowerCase().includes('bumped')) {
+          displayText = `${animalName} has bumped their head`;
+        } else if (problemText.toLowerCase().includes('cut')) {
+          displayText = `${animalName} has a ${problemText}`;
+        }
+        
         let html = `
-          <h2>${selected.character.animal} is ${selected.problem.problem}!</h2>
+          <h2>${displayText}!</h2>
           <div class="result-text">Give it: <strong>${solution.solution}</strong></div>
         `;
         if (solution.image) {
@@ -326,6 +342,7 @@
         `;
       }
     }
+
 
     
     function backToCharacters() {
