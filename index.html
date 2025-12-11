@@ -302,15 +302,15 @@
       selectProblem(index);
     }
     
-    function showSolution() {
-      const solution = solutions.find(s => 
-        s.animal === selected.character.animal && 
+        function showSolution() {
+      const matching = solutions.filter(s => 
         s.problem === selected.problem.problem
       );
       
       const resultArea = document.getElementById('resultArea');
       
-      if (solution && solution.solution) {
+      if (matching.length > 0) {
+        const solution = matching[Math.floor(Math.random() * matching.length)];
         let html = `
           <h2>${selected.character.animal} is ${selected.problem.problem}!</h2>
           <div class="result-text">Give it: <strong>${solution.solution}</strong></div>
@@ -326,6 +326,7 @@
         `;
       }
     }
+
     
     function backToCharacters() {
       selected.character = null;
